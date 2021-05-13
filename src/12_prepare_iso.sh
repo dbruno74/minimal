@@ -142,16 +142,6 @@ prepare_boot_uefi() {
     $WORK_DIR/uefi/EFI/BOOT
 
 
-  echo "Preparing 'systemd-boot' configuration."
-  mkdir -p $WORK_DIR/uefi/loader/entries
-  cp $SRC_DIR/minimal_boot/uefi/loader/loader.conf \
-    $WORK_DIR/uefi/loader
-  cp $SRC_DIR/minimal_boot/uefi/loader/entries/mll-${MLL_CONF}.conf \
-    $WORK_DIR/uefi/loader/entries
-
-  echo "Setting the default UEFI boot entry."
-  sed -i "s|default.*|default mll-$MLL_CONF|" $WORK_DIR/uefi/loader/loader.conf
-
   echo "Unmounting UEFI boot image file."
   sync
   umount $WORK_DIR/uefi
@@ -167,6 +157,11 @@ prepare_boot_uefi() {
   mkdir -p $ISOIMAGE/boot
   cp $WORK_DIR/uefi.img \
     $ISOIMAGE/boot
+  
+  mkdir -p $ISOIMAGE/boot/grub 
+
+  cp $SRC_DIR/minimal_boot/uefi/boot/grub.cfg \
+    $ISOIMAGE/boot/grub/
 }
 
 check_root() {

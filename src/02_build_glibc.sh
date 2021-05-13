@@ -7,6 +7,11 @@ set -e
 
 echo "*** BUILD GLIBC BEGIN ***"
 
+echo "Preparing Linux Kernel work directory"
+mkdir -p $KERNEL_INSTALLED
+cp -rf $SRC_DIR/minimal_boot/kernel/* $KERNEL_INSTALLED/
+
+
 # Prepare the work area, e.g. 'work/glibc/glibc_objects'.
 echo "Preparing glibc object area. This may take a while."
 rm -rf $GLIBC_OBJECTS

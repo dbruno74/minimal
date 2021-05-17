@@ -77,9 +77,9 @@ prepare_boot_uefi() {
   # letter 'x'.
   if [ "$BUSYBOX_ARCH" = "64-bit" ] ; then
     MLL_CONF=x86_64
-    # LOADER=$SRC_DIR/minimal_boot/uefi/EFI/BOOT/BOOTx64.EFI
+    LOADER=$SRC_DIR/minimal_boot/uefi/EFI/BOOT/BOOTx64.EFI
     GRUBX=$SRC_DIR/minimal_boot/uefi/EFI/BOOT/grubx64.efi
-    MMX=$SRC_DIR/minimal_boot/uefi/EFI/BOOT/bootx64.efi
+    MMX=$SRC_DIR/minimal_boot/uefi/EFI/BOOT/mmx64.efi
   else
     MLL_CONF=x86
     LOADER=$WORK_DIR/systemd-boot/systemd-boot*/uefi_root/EFI/BOOT/BOOTIA32.EFI
@@ -92,8 +92,8 @@ prepare_boot_uefi() {
   rootfs_size=`du -b $WORK_DIR/rootfs.cpio.xz | awk '{print \$1}'`
   echo "Rootfs size is '$rootfs_size'"
 
-  # loader_size=`du -b $LOADER | awk '{print \$1}'`
-  # echo "Loader size is '$loader_size'"
+  loader_size=`du -b $LOADER | awk '{print \$1}'`
+  echo "Loader size is '$loader_size'"
 
   grupx_size=`du -b $GRUBX | awk '{print \$1}'`
   echo "GRPUX size is '$grupx_size'"
@@ -102,7 +102,7 @@ prepare_boot_uefi() {
   echo "MMX size is '$mmx_size'"
 
   # The EFI boot image is 64KB bigger than the kernel size.
-  image_size=$((kernel_size + rootfs_size + grupx_size + grupx_size + mmx_size + 65536))
+  image_size=$((kernel_size + rootfs_size + loader_size + grupx_size + grupx_size + mmx_size + 65536))
   echo "Image size is '$image_size'"
 
   echo "Creating UEFI boot image file '$WORK_DIR/uefi.img'."
@@ -134,8 +134,8 @@ prepare_boot_uefi() {
 
   echo "Preparing 'systemd-boot' UEFI boot loader."
   mkdir -p $WORK_DIR/uefi/EFI/BOOT
-  # cp $LOADER \
-  #   $WORK_DIR/uefi/EFI/BOOT
+  cp $LOADER \
+    $WORK_DIR/uefi/EFI/BOOT
   cp $GRUBX \
     $WORK_DIR/uefi/EFI/BOOT
   cp $MMX \

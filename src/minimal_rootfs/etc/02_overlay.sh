@@ -63,6 +63,25 @@ DEFAULT_OVERLAY_DIR="/tmp/minimal/overlay"
 DEFAULT_UPPER_DIR="/tmp/minimal/rootfs"
 DEFAULT_WORK_DIR="/tmp/minimal/work"
 
+echo "Loading required kernel modules to the system"
+insmod lib/modules/5.8.0-43-generic/kernel/fs/fat/msdos.ko
+insmod lib/modules/5.8.0-43-generic/kernel/fs/isofs/isofs.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/scsi/scsi_transport_spi.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/ata/libahci.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/mon/usbmon.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/host/xhci-plat-hcd.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/host/xhci-pci-renesas.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/host/xhci-pci.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/class/usblp.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/usb/storage/usb-storage.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/hid.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/hid-generic.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/usbhid/usbhid.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/ata/ahci.ko
+echo "All required kernel modules are installed..."
+
+sleep 5
+
 echo "Searching available devices for overlay content."
 for DEVICE in /dev/* ; do
   DEV=$(echo "${DEVICE##*/}")

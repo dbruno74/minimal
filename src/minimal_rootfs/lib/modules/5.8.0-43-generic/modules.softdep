@@ -1,0 +1,29 @@
+# Soft dependencies extracted from modules themselves.
+softdep cifs gcm
+softdep cifs ccm
+softdep cifs aead2
+softdep cifs sha512
+softdep cifs sha256
+softdep cifs cmac
+softdep cifs aes
+softdep cifs nls
+softdep cifs md5
+softdep cifs md4
+softdep cifs hmac
+softdep cifs ecb
+softdep btrfs pre: blake2b-256
+softdep btrfs pre: sha256
+softdep btrfs pre: xxhash64
+softdep btrfs pre: crc32c
+softdep libcrc32c pre: crc32c
+softdep irq_madera pre: madera
+softdep gpio_madera pre: pinctrl-madera
+softdep ipmi_msghandler post: ipmi_devintf
+softdep wm8994 pre: wm8994_regulator
+softdep intel_lpss pre: platform:idma64
+softdep spi_pxa2xx_platform pre: dw_dmac
+softdep r8169 pre: realtek
+softdep mdev post: vfio_mdev
+softdep kpc2000 pre: uio post: kpc_nwl_dma kpc_i2c kpc_spi
+softdep pcengines_apuv2 pre: platform:gpio_amd_fch platform:leds-gpio platform:gpio_keys_polled
+softdep act_mpls post: mpls_gso

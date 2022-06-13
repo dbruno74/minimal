@@ -8,8 +8,9 @@ set -e
 mkdir -p $DEST_DIR/etc/autorun
 mkdir -p $DEST_DIR/root
 cp $SRC_DIR/99_deploy_uc20.sh $DEST_DIR/etc/autorun
-cp $OVERLAY_SOURCE_DIR/ubuntu-core-20-amd64.img.xz $DEST_DIR/root
-
+if [[ -e /root/ubuntu-core-20-amd64.img.xz ]]; then
+	cp $OVERLAY_SOURCE_DIR/ubuntu-core-20-amd64.img.xz $DEST_DIR/root
+fi
 
 chmod +x $DEST_DIR/etc/autorun/99_deploy_uc20.sh
 

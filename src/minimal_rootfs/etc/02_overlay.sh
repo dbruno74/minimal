@@ -78,6 +78,7 @@ insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/hid.ko
 insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/hid-generic.ko
 insmod lib/modules/5.8.0-43-generic/kernel/drivers/hid/usbhid/usbhid.ko
 insmod lib/modules/5.8.0-43-generic/kernel/drivers/ata/ahci.ko
+insmod lib/modules/5.8.0-43-generic/kernel/drivers/net/ethernet/realtek/r8169.ko
 echo "All required kernel modules are installed..."
 
 sleep 5
